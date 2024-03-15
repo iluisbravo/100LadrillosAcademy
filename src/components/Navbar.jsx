@@ -1,15 +1,16 @@
 import React from 'react'
 
 import LogoIcon from '../assets/academy-100L-logo.svg';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             <img height={50} src={LogoIcon} alt="Logo" />
-          </a>
+          </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -33,12 +34,23 @@ const Navbar = () => {
                 </ul>
               </li>
               <li className="nav-item">
-                <a className="nav-link" aria-disabled="true">Foro</a>
+                <a className="nav-link" href="#">Foro</a>
               </li>
             </ul>
             <div className="d-flex">
-              <button className="btn btn-outline-success me-2" type="button">Log In</button>
-              <button className="btn btn-success" type="button">Sign Up</button>
+
+              <Link to="/LogIn">
+                <button className="btn btn-outline-success me-2" type="button">
+                  Log In
+                </button>
+              </Link>
+
+              <Link to="/SignUp">
+                <button className="btn btn-success" type="button">
+                  Sign Up
+                </button>
+              </Link>
+
             </div>
           </div>
         </div>
