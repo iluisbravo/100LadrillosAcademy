@@ -66,6 +66,16 @@ h4{
   color: #ff6347;
 }
 
+.social-icons a {
+  display: inline-block; /* Asegura que los elementos a se comporten como bloques en línea */
+  transition: transform 0.3s ease-in-out; /* Agrega una transición suave de 0.3 segundos a la transformación */
+}
+
+.social-icons a:hover {
+  color: #F05754;
+  transform: scale(1.2); /* Aumenta el tamaño del icono al 120% cuando se hace hover */
+}
+
 .social-icons i:hover {
   color: #F05754;
 }
