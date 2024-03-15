@@ -64,7 +64,7 @@ const Navbar = ({ user, handleLogout }) => {
                 <>
                   <h6 className='align-self-center m-2'>{obtenerSaludo(user.name)}</h6>
 
-                  <button onClick={handleLogout} className="btn btn-success" type="button">
+                  <button onClick={handleLogout} className="btn btn-primary" type="button">
                     Log Out
                   </button>
 
@@ -74,12 +74,12 @@ const Navbar = ({ user, handleLogout }) => {
               {!user && (
                 <>
                   <Link to="/LogIn">
-                    <button className="btn btn-outline-success me-2" type="button">
+                    <button className="btn btn-outline-primary me-2" type="button">
                       Log In
                     </button>
                   </Link>
                   <Link to="/SignUp">
-                    <button className="btn btn-success" type="button">
+                    <button className="btn btn-primary" type="button">
                       Sign Up
                     </button>
                   </Link>
