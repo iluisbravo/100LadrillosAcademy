@@ -1,6 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { register } from '../api/api';
+
 
 const SignUp = () => {
+  const history = useHistory();
+  const [formData, setFormData] = useState({
+    name: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    gender: '',
+    birthdate: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await register(formData);
+      // Redirigir al usuario a otra página después del registro, por ejemplo, la página de inicio de sesión
+      history.push('/LogIn');
+    } catch (error) {
+      // Manejar errores de registro, como errores de validación del servidor, etc.
+      const errorMessage = error.response.data.code;
+      console.log(errorMessage);
+      alert(error.response.data.code);
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -11,77 +47,77 @@ const SignUp = () => {
                 className='rounded object-fit-cover'
                 width={450}
                 height={450}
-                src='https://img.freepik.com/fotos-premium/pequeno-edificio-fachada-rosa-toldo-azul-toldo-rosa_867452-3958.jpg' />
+                src='https://img.freepik.com/fotos-premium/pequeno-edificio-fachada-rosa-toldo-azul-toldo-rosa_867452-3958.jpg'
+                alt='Illustration' />
             </div>
           </div>
           <div className="col">
-            <h1>Sign Up</h1>
-            <p>¡Únete hoy para desbloquear tu potencial financiero! Accede a cursos, webinars y una comunidad de inversores en crecimiento. </p>
-            <form>
+            <h1>Registrarse ✌️</h1>
+            <p>¡Únete hoy para desbloquear tu potencial financiero! Accede a cursos, webinars y una comunidad de inversores en crecimiento.</p>
+            <form onSubmit={handleSubmit}>
               <div className='container-fluid'>
                 <div className='row'>
                   <div className='col'>
                     <div className="mb-3">
-                      <input type="text" placeholder='Nombre' className="form-control" id="nameInput" aria-describedby="nameHelp" />
+                      <input type="text" name="name" placeholder='Nombre' className="form-control" value={formData.name} onChange={handleChange} required />
                     </div>
                   </div>
                   <div className='col'>
                     <div className="mb-3">
-                      <input type="text" placeholder='Apellido' className="form-control" id="lastNameInput" aria-describedby="lastNameHelp" />
-                    </div>
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='col'>
-                    <div className="mb-3">
-                      <input type="email" placeholder='Email' className="form-control" id="nameInput" aria-describedby="nameHelp" />
-                    </div>
-                  </div>
-                  <div className='col'>
-                    <div className="mb-3">
-                      <input type="text" placeholder='Teléfono' className="form-control" id="lastNameInput" aria-describedby="lastNameHelp" />
+                      <input type="text" name="lastName" placeholder='Apellido' className="form-control" value={formData.lastName} onChange={handleChange} required />
                     </div>
                   </div>
                 </div>
                 <div className='row'>
                   <div className='col'>
                     <div className="mb-3">
-                      <input type="text" placeholder='Genero' className="form-control" id="nameInput" aria-describedby="nameHelp" />
+                      <input type="email" name="email" placeholder='Email' className="form-control" value={formData.email} onChange={handleChange} required />
                     </div>
                   </div>
                   <div className='col'>
                     <div className="mb-3">
-                      <input type="text" placeholder='Fecha de Nacimiento' className="form-control" id="lastNameInput" aria-describedby="lastNameHelp" />
-                    </div>
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='col'>
-                    <div className="mb-3">
-                      <input type="password" placeholder='Contraseña' className="form-control" id="nameInput" aria-describedby="nameHelp" />
-                    </div>
-                  </div>
-                  <div className='col'>
-                    <div className="mb-3">
-                      <input type="password" placeholder='Confirmar Contraseña' className="form-control" id="lastNameInput" aria-describedby="lastNameHelp" />
+                      <input type="text" name="phoneNumber" placeholder='Teléfono' className="form-control" value={formData.phone} onChange={handleChange} required />
                     </div>
                   </div>
                 </div>
                 <div className='row'>
                   <div className='col'>
                     <div className="mb-3">
-                      <button type="button" className="btn btn-primary">Registrar me</button>
+                      <input type="text" name="gender" placeholder='Genero' className="form-control" value={formData.gender} onChange={handleChange} required />
+                    </div>
+                  </div>
+                  <div className='col'>
+                    <div className="mb-3">
+                      <input type="date" name="birthdate" placeholder='Fecha de Nacimiento' className="form-control" value={formData.birthDate} onChange={handleChange} required />
+                    </div>
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='col'>
+                    <div className="mb-3">
+                      <input type="password" name="password" placeholder='Contraseña' className="form-control" value={formData.password} onChange={handleChange} required />
+                    </div>
+                  </div>
+                  <div className='col'>
+                    <div className="mb-3">
+                      <input type="password" name="confirmPassword" placeholder='Confirmar Contraseña' className="form-control" value={formData.confirmPassword} onChange={handleChange} required />
+                    </div>
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='col'>
+                    <div className="mb-3">
+                      <button type="submit" className="btn btn-primary">Registrarme</button>
                     </div>
                   </div>
                 </div>
               </div>
-
             </form>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

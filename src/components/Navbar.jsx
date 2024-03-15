@@ -1,12 +1,33 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 
 import LogoIcon from '../assets/academy-100L-logo.svg';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ user, handleLogout }) => {
+  function obtenerSaludo(nombre) {
+    const horaActual = new Date().getHours();
+
+    let saludo = '';
+    let emoji = '';
+
+    if (horaActual >= 5 && horaActual < 12) {
+      saludo = '¡Buenos días';
+      emoji = '☀️';
+    } else if (horaActual >= 12 && horaActual < 19) {
+      saludo = '¡Buenas tardes';
+      emoji = '🌤️';
+    } else {
+      saludo = '¡Buenas noches';
+      emoji = '🌙';
+    }
+
+    return `${saludo} ${nombre}! ${emoji}`;
+  }
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary shadow p-3 mb-5 rounded">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             <img height={50} src={LogoIcon} alt="Logo" />
@@ -39,17 +60,33 @@ const Navbar = () => {
             </ul>
             <div className="d-flex">
 
-              <Link to="/LogIn">
-                <button className="btn btn-outline-success me-2" type="button">
-                  Log In
-                </button>
-              </Link>
+              {user && (
+                <>
+                  <h6 className='align-self-center m-2'>{obtenerSaludo(user.name)}</h6>
 
-              <Link to="/SignUp">
-                <button className="btn btn-success" type="button">
-                  Sign Up
-                </button>
-              </Link>
+                  <button onClick={handleLogout} className="btn btn-success" type="button">
+                    Log Out
+                  </button>
+
+                </>
+              )}
+
+              {!user && (
+                <>
+                  <Link to="/LogIn">
+                    <button className="btn btn-outline-success me-2" type="button">
+                      Log In
+                    </button>
+                  </Link>
+                  <Link to="/SignUp">
+                    <button className="btn btn-success" type="button">
+                      Sign Up
+                    </button>
+                  </Link>
+                </>
+              )}
+
+
 
             </div>
           </div>

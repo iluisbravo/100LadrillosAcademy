@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
 .heroHeight {
   min-height: 90vh;
+}
+
+@keyframes moveLeft {
+  to { transform: translateX(-100%); } /* Mover completamente fuera del contenedor a la izquierda */
+}
+
+.iconBrand-container {
+  display: flex; /* Utiliza flexbox para alinear los iconos */
+  overflow: hidden; /* Oculta los iconos que se mueven fuera del contenedor */
+}
+
+.iconBrand {
+  flex-shrink: 0; /* Evita que los iconos se reduzcan para ajustarse al contenedor */
+  padding: 0 20px; /* Espaciado entre iconos */
+  animation: moveLeft 10s linear infinite; /* Aplica la animación */
+  white-space: nowrap; /* Evita que los iconos se envuelvan en varias líneas */
 }

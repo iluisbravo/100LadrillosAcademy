@@ -3,7 +3,7 @@ import React from 'react'
 const CommentCard = ({ img, name, occupation, date, comment }) => {
   return (
     <div className="col-4">
-      <div className="card">
+      <div className="card shadow">
         <div className="row g-0">
           <div className="col-md-5">
             <img height={'100%'} src={img} className="card-img object-fit-cover" alt="..." />

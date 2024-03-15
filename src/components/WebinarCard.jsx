@@ -3,7 +3,7 @@ import React from 'react'
 const WebinarCard = ({ img, title, description, fecha, autor }) => {
   return (
     <div className="col-3">
-      <div className="card">
+      <div className="card shadow">
         <img height={350} src={img} className="card-img object-fit-cover mx-auto d-block" alt={title} />
         <div className="card-img-overlay">
           <h3 className="card-title text-center badge text-bg-primary">{title}</h3>
