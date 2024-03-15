@@ -1,35 +1,92 @@
 /* eslint-disable no-useless-catch */
 // api.js
 
-import axios from 'axios';
+const BASE_URL = 'https://bc5f-187-190-205-111.ngrok-free.app/api/v1';
 
-const BASE_URL = 'https://9cc8-2806-2f0-5021-f6ec-6cd1-480f-aa90-9aa6.ngrok-free.app/api/v1';
-
-const api = axios.create({
-  baseURL: BASE_URL,
-});
-
-const login = async (email, password) => {
+async function login(email, password) {
   try {
-    const response = await api.post('/users/login', {
-      email,
-      password,
+    const response = await fetch(`${BASE_URL}/users/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
     });
-    return response.data;
+    const data = await response.json();
+    console.log(data, "USER");
+    return data;
   } catch (error) {
-    // Manejar errores de solicitud
+    console.error('Error logging in:', error);
     throw error;
   }
-};
+}
 
-const register = async (userData) => {
+async function register(userData) {
   try {
-    const response = await api.post('/users/register', userData);
-    return response.data;
+    const response = await fetch(`${BASE_URL}/users/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    });
+    const data = await response.json();
+    return data;
   } catch (error) {
-    // Manejar errores de solicitud
+    console.error('Error registering user:', error);
     throw error;
   }
-};
+}
 
-export { login, register };
+async function getInstructors() {
+  try {
+    const response = await fetch(`${BASE_URL}/instructors`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        "ngrok-skip-browser-warning":"any"
+      }
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching instructors:', error);
+    throw error;
+  }
+}
+
+async function getCourses() {
+  try {
+    const response = await fetch(`${BASE_URL}/courses`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        "ngrok-skip-browser-warning":"any"
+      }
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching courses:', error);
+    throw error;
+  }
+}
+
+async function getWebinars() {
+  try {
+    const response = await fetch(`${BASE_URL}/webinars`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        "ngrok-skip-browser-warning":"any"
+      }
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching webinars:', error);
+    throw error;
+  }
+}
+
+export { login, register, getInstructors, getCourses, getWebinars };

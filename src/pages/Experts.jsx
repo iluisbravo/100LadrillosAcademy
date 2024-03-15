@@ -1,38 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ExpertCard from '../components/ExpertCard';
-
-const cursosData = [
-  { 
-    img: "https://source.unsplash.com/random/800x600/?woman+face+profile",
-    title: "Contador",
-    description: "Aprende a administrar tus finanzas personales y alcanza la libertad financiera.",
-    autor: "Ana López",
-    fecha: "10 Abr 2023"
-  },
-  { 
-    img: "https://source.unsplash.com/random/800x600/?man+face+professional",
-    title: "Ejecutivo Financiero",
-    description: "Descubre estrategias de inversión y aprende a operar en los mercados financieros.",
-    autor: "Juan Pérez",
-    fecha: "15 Jul 2023"
-  },
-  { 
-    img: "https://source.unsplash.com/random/800x600/?woman+face+smile",
-    title: "Director de Finanzas",
-    description: "Explora el impacto de la economía en el desarrollo sostenible del planeta.",
-    autor: "María Gómez",
-    fecha: "20 Sep 2023"
-  },
-  { 
-    img: "https://source.unsplash.com/random/800x600/?man+face+happy",
-    title: "Licenciado en Economía",
-    description: "Aprende técnicas de trading y domina el mercado de valores.",
-    autor: "Carlos Rodríguez",
-    fecha: "5 Nov 2023"
-  }
-];
+import { getInstructors } from '../api/api';
 
 const Experts = () => {
+  const [expertsData, setExpertsData] = useState([]);
+
+  useEffect(() => {
+    const fetchInstructors = async () => {
+      try {
+        const instructors = await getInstructors();
+        console.log(instructors, "INSTRUCTORS")
+        setExpertsData(instructors);
+      } catch (error) {
+        console.error('Error fetching instructors:', error);
+      }
+    };
+
+    fetchInstructors();
+  }, []);
+  
   return (
     <div className="container my-5">
       <div className="row">
@@ -42,14 +28,14 @@ const Experts = () => {
       </div>
       <div className="row g-4">
         {
-          cursosData.map(item => {
+          expertsData.map(item => {
             return (<ExpertCard
-              key={item.title}
-              img={item.img}
-              title={item.title}
+              key={item.fecha}
+              img={item.profilePictureUrl}
+              title={item.occupation}
               description={item.description}
               fecha={item.fecha}
-              autor={item.autor}
+              autor={item.name + " " + item.lastName}
             />)
           })
         }

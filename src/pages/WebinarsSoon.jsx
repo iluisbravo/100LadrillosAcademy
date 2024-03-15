@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import WebinarCard from '../components/WebinarCard';
+import { getWebinars } from '../api/api';
+import moment from 'moment';
 
 const cursosData = [
   { 
@@ -33,6 +35,21 @@ const cursosData = [
 ];
 
 const WebinarsSoon = () => {
+  const [webinarData, setWebinarData] = useState([]);
+
+  useEffect(() => {
+    const fetchInstructors = async () => {
+      try {
+        const instructors = await getWebinars();
+        setWebinarData(instructors);
+      } catch (error) {
+        console.error('Error fetching instructors:', error);
+      }
+    };
+
+    fetchInstructors();
+  }, []);
+
   return (
     <div className="container my-5">
       <div className="row">
@@ -42,14 +59,15 @@ const WebinarsSoon = () => {
       </div>
       <div className="row g-4">
         {
-          cursosData.map(item => {
+          webinarData.map(item => {
             return (<WebinarCard
-              key={item.title}
-              img={item.img}
+              key={item.broadcastDate}
+              img={item.thumbnailUrl}
               title={item.title}
               description={item.description}
-              fecha={item.fecha}
-              autor={item.autor}
+              fecha={moment(item.broadcastDate).format("DD/MM/YY")}
+              category={item.category}
+              autor={item.instructor.name + " " + item.instructor.lastName}
             />)
           })
         }

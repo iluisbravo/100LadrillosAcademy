@@ -1,12 +1,12 @@
 import React from 'react'
 
-const WebinarCard = ({ img, title, description, fecha, autor }) => {
+const WebinarCard = ({ img, title, description, fecha, autor, category }) => {
   return (
-    <div className="col-3">
+    <div className="col-4">
       <div className="card shadow">
         <img height={350} src={img} className="card-img object-fit-cover mx-auto d-block" alt={title} />
         <div className="card-img-overlay">
-          <h3 className="card-title text-center badge text-bg-primary">{title}</h3>
+          <h3 className="card-title text-center badge text-bg-primary">{category}</h3>
         </div>
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
