@@ -11,7 +11,7 @@ const LogIn = () => {
                 className='rounded object-fit-cover'
                 width={450}
                 height={450}
-                src='https://images.unsplash.com/photo-1524292691042-82ed9c62673b?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' />
+                src='https://img.freepik.com/foto-gratis/representacion-3d-casa-dibujos-animados_23-2150188323.jpg?t=st=1710471906~exp=1710475506~hmac=5002603793e6237eec45e9b271192425394c9141cccfedd4a7c1289e91cf20bb&w=1380' />
             </div>
           </div>
           <div className="col">

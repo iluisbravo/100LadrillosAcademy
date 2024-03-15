@@ -11,7 +11,7 @@ const SignUp = () => {
                 className='rounded object-fit-cover'
                 width={450}
                 height={450}
-                src='https://img.freepik.com/premium-photo/3d-render-beautiful-modern-house-plane-background_927984-1601.jpg?w=1380' />
+                src='https://img.freepik.com/fotos-premium/pequeno-edificio-fachada-rosa-toldo-azul-toldo-rosa_867452-3958.jpg' />
             </div>
           </div>
           <div className="col">
