@@ -27,7 +27,7 @@ const Navbar = ({ user, handleLogout }) => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary shadow p-3 mb-5 rounded">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary shadow p-3 rounded">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             <img height={50} src={LogoIcon} alt="Logo" />

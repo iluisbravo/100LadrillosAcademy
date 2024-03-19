@@ -11,7 +11,7 @@ import SubFooter from '../components/SubFooter'
 const Landing = () => {
   return (
     <>
-      <div id="hero" className="container">
+      <div id="hero" className="container-fluid gradient">
         <Hero />
       </div>
       <Brands />

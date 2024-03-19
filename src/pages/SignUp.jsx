@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { register } from '../api/api';
 
-
 const SignUp = () => {
   const history = useHistory();
   const [formData, setFormData] = useState({
@@ -10,25 +9,39 @@ const SignUp = () => {
     lastName: '',
     email: '',
     phoneNumber: '',
-    gender: '',
+    gender: 'hombre',
     birthdate: '',
     password: '',
     confirmPassword: ''
   });
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+
+    // Verificar si las contraseñas coinciden al cambiarlas
+    if (e.target.name === 'confirmPassword') {
+      setPasswordMatch(e.target.value === formData.password);
+    } else if (e.target.name === 'password') {
+      setPasswordMatch(e.target.value === formData.confirmPassword);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register(formData);
-      // Redirigir al usuario a otra página después del registro, por ejemplo, la página de inicio de sesión
-      history.push('/LogIn');
+      const response = await register(formData);
+
+      if (response?.code) {
+        alert("Error: " + response.code.toString())
+      } else {
+        // Redirigir al usuario a otra página después del registro, por ejemplo, la página de inicio de sesión
+        history.push('/LogIn');
+      }
+
     } catch (error) {
       // Manejar errores de registro, como errores de validación del servidor, etc.
       const errorMessage = error.response.data.code;
@@ -83,7 +96,12 @@ const SignUp = () => {
                 <div className='row'>
                   <div className='col'>
                     <div className="mb-3">
-                      <input type="text" name="gender" placeholder='Genero' className="form-control" value={formData.gender} onChange={handleChange} required />
+                      {/* <input type="text" name="gender" placeholder='Genero' className="form-control" value={formData.gender} onChange={handleChange} required /> */}
+                      <select name="gender" value={formData.gender} onChange={handleChange} required className="form-control" aria-label="Default select example">
+                        <option selected disabled>Género</option>
+                        <option value="hombre">Hombre</option>
+                        <option value="mujer">Mujer</option>
+                      </select>
                     </div>
                   </div>
                   <div className='col'>
@@ -101,6 +119,9 @@ const SignUp = () => {
                   <div className='col'>
                     <div className="mb-3">
                       <input type="password" name="confirmPassword" placeholder='Confirmar Contraseña' className="form-control" value={formData.confirmPassword} onChange={handleChange} required />
+                      {/* Mensaje de texto si las contraseñas no coinciden */}
+                      {!passwordMatch && <small
+                        className="form-text text-danger">Las contraseñas no coinciden</small>}
                     </div>
                   </div>
                 </div>

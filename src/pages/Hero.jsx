@@ -16,7 +16,7 @@ const Hero = () => {
             className='rounded object-fit-cover'
             width={450}
             height={450}
-            src='https://images.unsplash.com/photo-1603201667141-5a2d4c673378?q=80&w=2696&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' />
+            src='https://i.pinimg.com/736x/76/59/69/765969e7103ee7985dd9440bb4754635.jpg' />
         </div>
       </div>
     </div>
